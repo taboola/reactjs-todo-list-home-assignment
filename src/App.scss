@@ -1,0 +1,19 @@
+@import "style/colors";
+.app {
+  background-color: $light-background;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+
+  .list-title {
+    align-self: center;
+  }
+}
+
+.progress {
+  display: flex;
+  align-self: center;
+  align-items: center;
+  height: 100vh;
+  gap:30px;
+}

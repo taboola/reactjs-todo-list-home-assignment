@@ -1,0 +1,13 @@
+.todo-list-container {
+  display: flex;
+  justify-content: center;
+
+  .todo-list {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    width: max-content;
+  }
+}
