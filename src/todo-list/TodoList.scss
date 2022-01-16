@@ -1,6 +1,7 @@
 .todo-list-container {
   display: flex;
   justify-content: center;
+  overflow: auto;
 
   .todo-list {
     display: flex;

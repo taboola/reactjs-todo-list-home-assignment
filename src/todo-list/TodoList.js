@@ -2,7 +2,7 @@ import {deleteTodo, updateTodo} from "../api";
 import {TodoListItem} from "./todo-list-item/TodoListItem";
 import './TodoList.scss'
 import CircularProgress from '@mui/material/CircularProgress';
-import {useTodos} from "./useTodos";
+import {useTodos} from "./hooks/useTodos";
 
 export function TodoList() {
     const [{todosList, isLoading}, setTodosList] = useTodos()

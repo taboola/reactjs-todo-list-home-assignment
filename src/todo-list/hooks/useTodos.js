@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {getTodos} from "../api";
+import {getTodos} from "../../api";
 
 export function useTodos() {
     const [todosList, setTodosList] = useState([])
