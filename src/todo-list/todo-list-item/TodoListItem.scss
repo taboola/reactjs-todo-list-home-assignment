@@ -1,12 +1,21 @@
 @import "src/style/colors";
+
 .todo-list-item {
   background-color: $light-list-item;
   padding: 10px;
   margin: 10px;
   border-radius: 10px;
 
+  .dark-theme &{
+    background-color: $dark-list-item;
+  }
+
   &[data-completed] {
     text-decoration: line-through;
     background-color: $light-list-item-completed;
+
+    .dark-theme &{
+      background-color: $dark-list-item-completed;
+    }
   }
 }

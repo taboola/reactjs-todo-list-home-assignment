@@ -1,5 +1,4 @@
-import {useEffect, useState} from "react";
-import {deleteTodo, getTodos, updateTodo} from "../api";
+import {deleteTodo, updateTodo} from "../api";
 import {TodoListItem} from "./todo-list-item/TodoListItem";
 import './TodoList.scss'
 import CircularProgress from '@mui/material/CircularProgress';
@@ -45,7 +44,6 @@ export function TodoList() {
                 })
             })
             .catch(e => {
-                console.log(e)
                 setTodosList(todosList)
             })
     }
@@ -53,7 +51,7 @@ export function TodoList() {
     const handleClick = (event, {id, completed}) => {
         event.stopPropagation()
         const isCtrlClicked = event.ctrlKey || event.metaKey
-        // ctrlClicked? deleteTodo : updateTodo
+
         isCtrlClicked ?
             deleteTodoById(id) :
             updateCompleted(id, !completed);

@@ -5,6 +5,10 @@
   flex-direction: column;
   margin: 0;
 
+  &.dark-theme{
+    background-color: $dark-background;
+  }
+
   .list-title {
     align-self: center;
   }
