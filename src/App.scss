@@ -1,11 +1,13 @@
 @import "style/colors";
 .app {
+  color: $light-text-color;
   background-color: $light-background;
   display: flex;
   flex-direction: column;
   margin: 0;
 
   &.dark-theme{
+    color: $dark-text-color;
     background-color: $dark-background;
   }
 

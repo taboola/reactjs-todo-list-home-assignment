@@ -8,9 +8,9 @@ export function useTodos() {
     useEffect(() => {
         getTodos().then((list) => {
             setTodosList(list)
-            setTimeout(()=> setIsLoading(false), 2000)
+            setTimeout(() => setIsLoading(false), 2000)
         })
     }, [])
 
-    return [{todosList,isLoading}, {setTodosList, setIsLoading}]
+    return [{todosList, isLoading}, setTodosList]
 }

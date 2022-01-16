@@ -4,19 +4,8 @@ import './TodoList.scss'
 import CircularProgress from '@mui/material/CircularProgress';
 import {useTodos} from "./useTodos";
 
-/*
-* completed
-* id
-* title
-* userId
-* */
-
 export function TodoList() {
-    const [
-        {todosList, isLoading},
-        {setTodosList}] =
-        useTodos()
-
+    const [{todosList, isLoading}, setTodosList] = useTodos()
 
     const deleteTodoById = (id) => {
         setTodosList(prevState => {
@@ -24,13 +13,12 @@ export function TodoList() {
         })
 
         deleteTodo(id)
-            .catch(e => {
-                console.log(e)
+            .catch(_ => {
                 setTodosList(todosList)
             })
     }
 
-    function updateCompleted(id, completed) {
+    function toggleCompleted(id, completed) {
         setTodosList(prevState => {
             return prevState.slice().map(todo => todo.id === id ? {...todo, completed} : todo)
         })
@@ -38,9 +26,7 @@ export function TodoList() {
         updateTodo({todoId: id, update: {completed}})
             .then((updatedTodo) => {
                 setTodosList(prevState => {
-                    return prevState.slice().map(todo => {
-                        return todo.id === id ? {...updatedTodo} : todo
-                    })
+                    return prevState.slice().map(todo => todo.id === id ? {...updatedTodo} : todo)
                 })
             })
             .catch(e => {
@@ -54,7 +40,7 @@ export function TodoList() {
 
         isCtrlClicked ?
             deleteTodoById(id) :
-            updateCompleted(id, !completed);
+            toggleCompleted(id, !completed);
     }
 
     return (
