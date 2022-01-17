@@ -1,3 +1,4 @@
+import React from 'react'
 import "normalize.css";
 import "./styles.css";
 import { StrictMode } from "react";

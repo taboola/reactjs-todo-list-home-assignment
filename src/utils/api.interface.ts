@@ -1,0 +1,1 @@
+export type MutateProps = {todoId:number, update:{completed:boolean}}
