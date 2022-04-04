@@ -10,6 +10,9 @@ export const reducer = (state, action) => {
     case "setItems":
       newState.items = [...action.val];
       break;
+    case "setRefreshKey":
+      newState.refreshKey = action.val;
+      break;
     default:
       throw new Error("invalid action.type");
   }

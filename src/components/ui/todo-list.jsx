@@ -9,8 +9,7 @@ import { TodoItem } from "./todo-item";
 export const TodoList = () => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   const value = { state, dispatch };
-
-  useEffect(() => {
+  const getItemsHandler = () => {
     dispatch({ type: "setIsLoading", val: true });
     getTodos()
       .then((res) => {
@@ -22,17 +21,21 @@ export const TodoList = () => {
       .finally(() => {
         dispatch({ type: "setIsLoading", val: false });
       });
-  }, []);
+  };
+
+  useEffect(() => {
+    getItemsHandler();
+  }, [state.refreshKey]);
 
   return (
     <ListContext.Provider value={value}>
       {state.isLoading && <div>Loading....</div>}
       {state.error === "" && !state.isLoading && (
-        <ListContainer>
+        <div>
           {state.items.map((item, index) => (
-            <TodoItem data={item} index={index} key={item.id} />
+            <TodoItem data={item} key={item.id} />
           ))}
-        </ListContainer>
+        </div>
       )}
       {state.error !== "" && <div>Error</div>}
     </ListContext.Provider>

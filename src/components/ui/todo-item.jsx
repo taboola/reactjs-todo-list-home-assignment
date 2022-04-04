@@ -1,19 +1,31 @@
-import React from "react";
-import { ItemCell, ItemContainer } from "../../utils/styles";
+import React, { useContext } from "react";
+import { deleteTodo } from "../../api";
+import { ListContext } from "../../utils/context";
 
 export const TodoItem = ({ data, index }) => {
   const status = data.completed ? "Completed" : "Incomplete";
-  const bgColor = index % 2 === 0 ? "#e6e6e6" : "white";
-  const color = data.completed ? "green" : "red";
+  const { state, dispatch } = useContext(ListContext);
+  const dbClickHandler = (e) => {
+    deleteTodo(data.id)
+      .then((res) => {
+        if (res.status === 200) {
+          dispatch({ type: "setRefreshKey", val: state.refreshKey + 1 });
+        }
+      })
+      .catch();
+    /* console.log(e);
+    debugger; */
+  };
   return (
-    <ItemContainer bgColor={bgColor}>
-      <ItemCell minWidth={30} paddingRight={20}>
-        {data.id}
-      </ItemCell>
-      <ItemCell minWidth={500} paddingRight={20}>
-        {data.title}
-      </ItemCell>
-      <ItemCell color={color}>{status}</ItemCell>
-    </ItemContainer>
+    <div
+      onDoubleClick={(e) => {
+        dbClickHandler(e);
+      }}
+      id={data.id}
+    >
+      <div>{data.id}</div>
+      <div>{data.title}</div>
+      <div>{status}</div>
+    </div>
   );
 };
