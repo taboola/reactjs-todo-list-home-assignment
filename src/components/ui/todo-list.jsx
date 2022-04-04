@@ -1,6 +1,6 @@
 import React, { useReducer, useEffect } from "react";
 import { getTodos } from "../../api";
-import { INITIAL_STATE } from "../../utils/constants";
+import { DARK_THEME, INITIAL_STATE } from "../../utils/constants";
 import { ListContainer } from "../../utils/styles";
 import { ListContext } from "../../utils/context";
 import { reducer } from "../../utils/reducer";
@@ -28,8 +28,13 @@ export const TodoList = () => {
     // getItemsHandler();
   }, [state.refreshKey]);
 
-  // instead - I'm fetching just once from the server
   useEffect(() => {
+    const darkTheme = window.matchMedia("(prefers-color-scheme: dark)");
+    if (darkTheme) {
+      dispatch({ type: "setTheme", val: DARK_THEME });
+    }
+
+    // instead - I'm fetching just once from the server
     getItemsHandler();
   }, []);
 
@@ -43,7 +48,7 @@ export const TodoList = () => {
         {state.isLoading && <div>Loading....</div>}
         {state.error === "" && !state.isLoading && (
           <div>
-            {state.items.map((item, index) => (
+            {state.items.map((item) => (
               <TodoItem data={item} key={item.id} />
             ))}
           </div>

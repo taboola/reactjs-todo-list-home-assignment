@@ -7,7 +7,7 @@ export const LIGHT_THEME = {
 
 export const DARK_THEME = {
   color: "#ffffff",
-  completed: "#eadfd9",
+  completed: "#304056",
   incomplete: "#465975",
   listBgColor: "#101b29",
 };

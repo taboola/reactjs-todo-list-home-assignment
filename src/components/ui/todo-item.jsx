@@ -15,7 +15,7 @@ export const TodoItem = ({ data }) => {
       const oldItems = state.items;
       deleteTodo(data.id)
         .then((res) => {
-          //if the server returned an updated list, I'd refresh the list at this point to re-render the fetched items without the deleted item
+          //if the server has returned an updated list, I'd refresh the list at this point to re-render the fetched items without the deleted item
           // dispatch({ type: "setRefreshKey", val: state.refreshKey + 1 });
 
           // instead (since I can't fetch an updated list), I'll manually update the items state
