@@ -13,6 +13,9 @@ export const reducer = (state, action) => {
     case "setRefreshKey":
       newState.refreshKey = action.val;
       break;
+    case "setTheme":
+      newState.theme = action.val;
+      break;
     default:
       throw new Error("invalid action.type");
   }

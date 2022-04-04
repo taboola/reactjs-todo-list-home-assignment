@@ -1,20 +1,26 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { deleteTodo, updateTodo } from "../../api";
+import { ItemContainer } from "../../utils/styles";
 import { ListContext } from "../../utils/context";
 
 export const TodoItem = ({ data }) => {
-  const [status, setStatus] = useState(data.completed);
   const { state, dispatch } = useContext(ListContext);
 
+  // since the server is stateless, I must use a local state to re-render the item color onClick
+  const [completed, setCompleted] = useState(data.completed);
+
+  /*   useEffect(() => {
+    debugger;
+  }, [data.completed]); */
+
   const clickHandler = (e) => {
-    setStatus((prev) => !prev); // happy path (provide immediate feedback)
+    debugger;
     updateTodo(data.id, "update")
       .then((res) => {
         dispatch({ type: "setRefreshKey", val: state.refreshKey + 1 });
       })
       .catch((e) => {
         console.log(`Error: item #${data.id} status cannot be modified: ${e}`);
-        setStatus((prev) => !prev); // rollback
       });
   };
   const dbClickHandler = () => {
@@ -28,11 +34,10 @@ export const TodoItem = ({ data }) => {
       });
   };
   return (
-    <div onClick={clickHandler} onDoubleClick={dbClickHandler} id={data.id}>
-      <div>{data.id}</div>
-      <div>{data.title}</div>
-      {status && <div>Completed</div>}
-      {!status && <div>Incomplete</div>}
-    </div>
+    <ItemContainer completed={completed} theme={state.theme}>
+      <div onClick={clickHandler} onDoubleClick={dbClickHandler} id={data.id}>
+        <div>{data.title}</div>
+      </div>
+    </ItemContainer>
   );
 };

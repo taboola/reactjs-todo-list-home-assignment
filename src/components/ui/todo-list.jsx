@@ -29,15 +29,21 @@ export const TodoList = () => {
 
   return (
     <ListContext.Provider value={value}>
-      {state.isLoading && <div>Loading....</div>}
-      {state.error === "" && !state.isLoading && (
-        <div>
-          {state.items.map((item, index) => (
-            <TodoItem data={item} key={item.id} />
-          ))}
-        </div>
-      )}
-      {state.error !== "" && <div>Error</div>}
+      <ListContainer
+        color={state.theme.color}
+        listBgColor={state.theme.listBgColor}
+      >
+        <h1>My List</h1>
+        {state.isLoading && <div>Loading....</div>}
+        {state.error === "" && !state.isLoading && (
+          <div>
+            {state.items.map((item, index) => (
+              <TodoItem data={item} key={item.id} />
+            ))}
+          </div>
+        )}
+        {state.error !== "" && <div>Error</div>}
+      </ListContainer>
     </ListContext.Provider>
   );
 };
