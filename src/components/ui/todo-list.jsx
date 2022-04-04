@@ -24,8 +24,14 @@ export const TodoList = () => {
   };
 
   useEffect(() => {
-    getItemsHandler();
+    //should call this if the server were to return an updated list of items
+    // getItemsHandler();
   }, [state.refreshKey]);
+
+  // instead - I'm fetching just once from the server
+  useEffect(() => {
+    getItemsHandler();
+  }, []);
 
   return (
     <ListContext.Provider value={value}>
