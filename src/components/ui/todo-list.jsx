@@ -1,7 +1,9 @@
 import React, { useReducer, useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Spinner } from "react-bootstrap";
 import { getTodos } from "../../api";
 import { DARK_THEME, INITIAL_STATE } from "../../utils/constants";
-import { ListContainer } from "../../utils/styles";
+import { ListContainer, ListHeader, SpinnerWrapper } from "../../utils/styles";
 import { ListContext } from "../../utils/context";
 import { reducer } from "../../utils/reducer";
 import { TodoItem } from "./todo-item";
@@ -44,8 +46,13 @@ export const TodoList = () => {
         color={state.theme.color}
         listBgColor={state.theme.listBgColor}
       >
-        <h1>My List</h1>
-        {state.isLoading && <div>Loading....</div>}
+        <ListHeader>My List</ListHeader>
+        {state.isLoading && (
+          <SpinnerWrapper>
+            <Spinner animation='border' role='status'></Spinner>
+            <span>loading...</span>
+          </SpinnerWrapper>
+        )}
         {state.error === "" && !state.isLoading && (
           <div>
             {state.items.map((item) => (
